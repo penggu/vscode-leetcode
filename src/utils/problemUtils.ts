@@ -15,7 +15,7 @@ export function genFileExt(language: string): string {
 }
 
 export function genFileName(node: IProblem, language: string): string {
-    const slug: string = _.kebabCase(node.name);
+    const slug: string = _.kebabCase(node.name).replace(/-/g, '_')
     const ext: string = genFileExt(language);
     return `p${node.id}_${slug}.${ext}`;
 }
