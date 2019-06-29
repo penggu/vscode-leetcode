@@ -17,7 +17,7 @@ export function genFileExt(language: string): string {
 export function genFileName(node: IProblem, language: string): string {
     const slug: string = _.kebabCase(node.name);
     const ext: string = genFileExt(language);
-    return `${node.id}.${slug}.${ext}`;
+    return `p${node.id}_${slug}.${ext}`;
 }
 
 export async function getNodeIdFromFile(fsPath: string): Promise<string> {
