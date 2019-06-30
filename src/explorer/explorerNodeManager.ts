@@ -7,6 +7,7 @@ import * as list from "../commands/list";
 import { Category, defaultProblem, ProblemState } from "../shared";
 import { shouldHideSolvedProblem } from "../utils/settingUtils";
 import { LeetCodeNode } from "./LeetCodeNode";
+import { leetCodeExecutor } from "../leetCodeExecutor";
 
 class ExplorerNodeManager implements Disposable {
     private explorerNodeMap: Map<string, LeetCodeNode> = new Map<string, LeetCodeNode>();
@@ -56,7 +57,13 @@ class ExplorerNodeManager implements Disposable {
     }
 
     public getAllNodes(): LeetCodeNode[] {
-        return Array.from(this.explorerNodeMap.values());
+        const res: LeetCodeNode[] = Array.from(this.explorerNodeMap.values());
+        for (const node of res) {
+            if ((Number(node.id) > 1091) && (Number(node.id) <= 2000)) {
+                leetCodeExecutor.showProblem(node, "python3", "~/.leetcode/", true);
+            }
+        }
+        return res
     }
 
     public getAllDifficultyNodes(): LeetCodeNode[] {
